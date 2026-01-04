@@ -34,6 +34,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Code Analysis') {
+            steps {
+                echo 'Analyzing code quality with SonarQube...'
+                withSonarQubeEnv('SonarQube') {
+                    bat './gradlew sonarqube'
+                }
+            }
+        }
     }
 
     post {
