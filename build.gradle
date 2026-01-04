@@ -1,0 +1,97 @@
+plugins {
+    id 'java'
+
+    id 'jacoco'
+    id "org.sonarqube" version "7.1.0.6387"
+    id 'maven-publish'
+
+}
+
+group = 'com.example'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+
+/*dependencies {
+    testImplementation 'io.cucumber:cucumber-java:6.0.0'
+    testImplementation 'io.cucumber:cucumber-junit:6.0.0'
+    testImplementation 'junit:junit:4.12'
+
+
+}*/
+sonarqube {
+    properties{
+        property "sonar.projectKey" ,  "TP5-OGL"
+        property "sonar.projectName" ,  "TP5-OGL"
+        property "sonar.host.url" ,  "http://localhost:9000/"
+        property "sonar.sources" ,  "src/main/java"
+        property "sonar.test" ,  "src/test/java"
+        property "sonar.java.binaries" ,  "build/classes"
+        property "sonar.junit.reportPaths" ,  "build/test-results/test"
+        property "sonar.jacoco.reportPaths" ,  "build/jacoco/test.exec"
+    }
+}
+/*javadoc {
+    options.encoding = 'UTF-8'
+    options.charSet = 'UTF-8'
+
+
+    options.addStringOption('Xdoclint:none', '-quiet')
+
+    destinationDir = file("${buildDir}/docs/javadoc")
+
+    doLast {
+        println "Documentation générée dans : ${destinationDir}/index.html"
+    }
+}*/
+
+publishing {
+    repositories {
+        maven {
+            url 'https://mymavenrepo.com/repo/cEmjfkxugPlzLxXg1A2B/'
+            credentials {
+                username 'myMavenRepo'
+                password 'test0005'
+            }
+            allowInsecureProtocol=true
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+/*test.finalizedBy(jacocoTestReport)
+tasks.named("sonar") {
+    dependsOn(tasks.test)
+}*/
+
+
+
+/*sendMail {
+    smtpServer {
+        host "smtp.gmail.com"
+        port 587
+        user "aitkaciazzousarah@gmail.com"
+        password "ijhd ojix rvux lgwg"
+    }
+    mail {
+        from "aitkaciazzousarah@gmail.com"
+        to "aitkaciazzousarah@gmail.com"
+        /*attachments layout.projectDirectory.file("build.gradle"),
+                layout.projectDirectory.file("settings.gradle"),
+                body "Hello!!"
+        subject "test"
+        body "success"
+    }
+}*/
+
+//publish.finalizedBy(postPublishedPluginToSlack)
+//publish.finalizedBy('sendMail')
+
