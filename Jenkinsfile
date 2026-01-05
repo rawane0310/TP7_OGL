@@ -108,7 +108,7 @@ pipeline {
                 echo '========== NOTIFICATION DE SUCCÈS =========='
 
                 // Notification par Email
-                emailext(
+                mail(
                     subject: "Déploiement réussi - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                     body: """
                         <h2> Déploiement réussi !</h2>
@@ -141,7 +141,7 @@ pipeline {
             echo '========== NOTIFICATION D\'ÉCHEC =========='
 
             // Notification par Email en cas d'échec
-            emailext(
+            mail(
                 subject: "Échec du build - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
                     <h2> Le build a échoué !</h2>
