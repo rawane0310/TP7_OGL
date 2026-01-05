@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-
     id 'jacoco'
     id "org.sonarqube" version "7.1.0.6387"
     id 'maven-publish'
@@ -13,13 +12,6 @@ version = '1.0'
 repositories {
     mavenCentral()
 }
-
-
-/*cucumberReports {
-    outputDir = file('build/reports/cucumber')
-    buildId = '0'
-    reports = files('reports/example-report.json')
-}*/
 
 dependencies {
     testImplementation 'io.cucumber:cucumber-java:6.0.0'
@@ -41,7 +33,8 @@ sonarqube {
         property "sonar.jacoco.reportPaths" ,  "build/jacoco/test.exec"
     }
 }
-/*javadoc {
+
+javadoc {
     options.encoding = 'UTF-8'
     options.charSet = 'UTF-8'
 
@@ -53,15 +46,15 @@ sonarqube {
     doLast {
         println "Documentation générée dans : ${destinationDir}/index.html"
     }
-}*/
+}
 
 publishing {
     repositories {
         maven {
-            url 'https://mymavenrepo.com/repo/cEmjfkxugPlzLxXg1A2B/'
+            url System.getenv('url')
             credentials {
-                username 'myMavenRepo'
-                password 'test0005'
+                username System.getenv('username')
+                password System.getenv('password')
             }
             allowInsecureProtocol=true
         }
@@ -73,13 +66,6 @@ publishing {
         }
     }
 }
-
-/*test.finalizedBy(jacocoTestReport)
-tasks.named("sonar") {
-    dependsOn(tasks.test)
-}*/
-
-
 
 /*sendMail {
     smtpServer {
@@ -99,6 +85,5 @@ tasks.named("sonar") {
     }
 }*/
 
-//publish.finalizedBy(postPublishedPluginToSlack)
-//publish.finalizedBy('sendMail')
+
 
