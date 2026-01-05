@@ -125,10 +125,10 @@ pipeline {
                 )
 
                 // Notification Slack
-                /*slackSend(
+                slackSend(
                     color: 'good',
                     message: "Déploiement réussi !\nProjet: ${env.JOB_NAME}\nBuild: #${env.BUILD_NUMBER}\nStatus: SUCCESS\n<${env.BUILD_URL}|Voir le build>"
-                )*/
+                )
             }
         }
     }
@@ -158,10 +158,10 @@ pipeline {
             )
 
             // Notification Slack en cas d'échec
-           /* slackSend(
+            slackSend(
                 color: 'danger',
                 message: "Échec du build !\nProjet: ${env.JOB_NAME}\nBuild: #${env.BUILD_NUMBER}\nStatus: FAILURE\n<${env.BUILD_URL}console|Voir les logs>"
-            )*/
+            )
         }
 
         success {
