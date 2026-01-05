@@ -24,7 +24,7 @@ public class MatrixMathematics {
 		if (matrix.size() == 1){
 			return matrix.getValueAt(0, 0);
 		}
-			
+			/// /////
 		if (matrix.size()==2) {
 			return (matrix.getValueAt(0, 0) * matrix.getValueAt(1, 1)) - ( matrix.getValueAt(0, 1) * matrix.getValueAt(1, 0));
 		}
@@ -43,7 +43,7 @@ public class MatrixMathematics {
 	private static int changeSign(int i) {
 		if (i%2==0)
 			return 1;
-		return -1;
+		return -1; ///
 	}
 	/**
 	 * Creates a submatrix excluding the given row and column
