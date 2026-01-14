@@ -133,11 +133,15 @@ pipeline {
                     mimeType: 'text/html'
                 )
 
-                // Notification Slack
-                slackSend(
-                    color: 'good',
-                    message: "Déploiement réussi !\nProjet: ${env.JOB_NAME}\nBuild: #${env.BUILD_NUMBER}\nStatus: SUCCESS\n<${env.BUILD_URL}|Voir le build>"
-                )
+                // Notification Slack via Webhook
+                script {
+                    def message = "Build  réussi "
+
+                    withCredentials([string(credentialsId: 'SLACK_AUTH_TOKEN', variable: 'WEBHOOK_URL')]) {
+                        bat """curl -X POST -H "Content-type: application/json" --data "{\\"text\\":\\"${message}\\"}" ${WEBHOOK_URL}"""
+                    }
+                    echo 'Notification Slack webhook envoyée'
+                }
             }
         }
     }
@@ -165,11 +169,15 @@ pipeline {
                 mimeType: 'text/html'
             )
 
-            // Notification Slack en cas d'échec
-            slackSend(
-                color: 'danger',
-                message: "Échec du build !\nProjet: ${env.JOB_NAME}\nBuild: #${env.BUILD_NUMBER}\nStatus: FAILURE\n<${env.BUILD_URL}console|Voir les logs>"
-            )
+            // Notification Slack via Webhook (échec)
+            script {
+                def message = "Build échoué"
+
+                withCredentials([string(credentialsId: 'SLACK_AUTH_TOKEN', variable: 'WEBHOOK_URL')]) {
+                    bat """curl -X POST -H "Content-type: application/json" --data "{\\"text\\":\\"${message}\\"}" ${WEBHOOK_URL}"""
+                }
+                echo 'Notification Slack webhook échec envoyée'
+            }
         }
 
         success {
