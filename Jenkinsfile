@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-            jdk 'jdk21'
-        }
+
     stages {
         // ========================================
         // 2.1 LA PHASE TEST
