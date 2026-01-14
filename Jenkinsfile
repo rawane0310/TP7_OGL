@@ -109,7 +109,7 @@ pipeline {
 
                 // Notification par Email
                 mail(
-                    subject: "Déploiement réussi - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    subject: "Déploiement réussi ",
                     body: """
                         <h2> Déploiement réussi !</h2>
                         <p><strong>Projet :</strong> ${env.JOB_NAME}</p>
