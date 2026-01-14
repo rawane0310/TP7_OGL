@@ -47,15 +47,21 @@ pipeline {
         // ========================================
         // 2.3 LA PHASE CODE QUALITY (Quality Gate)
         // ========================================
-        /*stage('Code Quality') {
+        stage('Code Quality') {
             steps {
                 echo '========== PHASE CODE QUALITY =========='
                 echo 'Vérification du Quality Gate de SonarQube...'
-                timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                script {
+                    timeout(time: 5, unit: 'MINUTES') {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Le Quality Gate a échoué : ${qg.status}. Arrêt du pipeline."
+                        }
+                        echo "Quality Gate passé avec succès : ${qg.status}"
+                    }
                 }
             }
-        }*/
+        }
 
         // ========================================
         // 2.4 LA PHASE BUILD
