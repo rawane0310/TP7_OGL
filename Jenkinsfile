@@ -34,7 +34,7 @@ pipeline {
         // ========================================
         // 2.2 LA PHASE CODE ANALYSIS
         // ========================================
-        /*stage('Code Analysis') {
+        stage('Code Analysis') {
             steps {
                 echo '========== PHASE CODE ANALYSIS =========='
                 echo 'Analyse de la qualité du code avec SonarQube...'
@@ -42,7 +42,7 @@ pipeline {
                     bat './gradlew sonarqube'
                 }
             }
-        }*/
+        }
 
         // ========================================
         // 2.3 LA PHASE CODE QUALITY (Quality Gate)
