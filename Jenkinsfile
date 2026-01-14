@@ -1,9 +1,8 @@
 pipeline {
     agent any
     tools {
-         jdk 'jdk11'
-    }
-
+            jdk 'jdk21'
+        }
     stages {
         // ========================================
         // 2.1 LA PHASE TEST
@@ -38,7 +37,9 @@ pipeline {
         // 2.2 LA PHASE CODE ANALYSIS
         // ========================================
         stage('Code Analysis') {
-
+            tools {
+                    jdk 'jdk11'
+                }
             steps {
                 echo '========== PHASE CODE ANALYSIS =========='
                 echo 'Analyse de la qualité du code avec SonarQube...'
@@ -155,10 +156,9 @@ pipeline {
                 subject: "Échec du build - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
                     <h2> Le build a échoué !</h2>
-                    <p><strong>Projet :</strong> ${env.JOB_NAME}</p>
-                    <p><strong>Build :</strong> #${env.BUILD_NUMBER}</p>
+
                     <p><strong>Status :</strong> FAILURE</p>
-                    <p><strong>Date :</strong> ${new Date()}</p>
+
                     <br>
                     <p>Une erreur s'est produite lors de l'exécution du pipeline.</p>
                     <p><a href="${env.BUILD_URL}console">Voir les logs</a></p>
