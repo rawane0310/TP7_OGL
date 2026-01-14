@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+         jdk 'jdk11'
+    }
 
     stages {
         // ========================================
@@ -35,6 +38,7 @@ pipeline {
         // 2.2 LA PHASE CODE ANALYSIS
         // ========================================
         stage('Code Analysis') {
+
             steps {
                 echo '========== PHASE CODE ANALYSIS =========='
                 echo 'Analyse de la qualité du code avec SonarQube...'
